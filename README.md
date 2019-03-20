@@ -23,3 +23,8 @@
 for login password is `admin` of user `admin`
 
 Due to lack of time some of features remains let me know if remains have to complete.
+
+Features to know:
+ - login
+ - create directory (created directory is saved is in the Desktop folder which is in the project directory)
+ - data also stored in db too.
