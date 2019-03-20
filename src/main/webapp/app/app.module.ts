@@ -18,6 +18,7 @@ import { Ubuntu18HomeModule } from './home/home.module';
 import { Ubuntu18AccountModule } from './account/account.module';
 import { Ubuntu18EntityModule } from './entities/entity.module';
 import * as moment from 'moment';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
 
@@ -30,6 +31,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
             alertAsToast: false,
             alertTimeout: 5000
         }),
+        NgbModule,
         Ubuntu18SharedModule.forRoot(),
         Ubuntu18CoreModule,
         Ubuntu18HomeModule,

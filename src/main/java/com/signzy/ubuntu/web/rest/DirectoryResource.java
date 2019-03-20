@@ -54,8 +54,6 @@ public class DirectoryResource {
             String command = null;
             if(directoryDTO.getParent().equals("Desktop")){
                 command = "mkdir Desktop/"+directoryDTO.getName();
-            }else{
-                command = "";
             }
             Process p = Runtime.getRuntime().exec(command);
             new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -142,6 +140,19 @@ public class DirectoryResource {
     @DeleteMapping("/directories/{id}")
     public ResponseEntity<Void> deleteDirectory(@PathVariable Long id) {
         log.debug("REST request to delete Directory : {}", id);
+        DirectoryDTO directoryDTO = directoryService.findOne(id).get();
+        try {
+            String command = null;
+            if(directoryDTO.getParent().equals("Desktop")){
+                command = "rmdir Desktop/"+directoryDTO.getName();
+            }
+            Process p = Runtime.getRuntime().exec(command);
+            new BufferedReader(new InputStreamReader(p.getInputStream()));
+            new BufferedReader(new InputStreamReader(p.getErrorStream()));
+        }
+        catch (IOException e) {
+            System.out.println(e);
+        }
         directoryService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }

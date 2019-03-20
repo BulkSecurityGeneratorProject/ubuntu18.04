@@ -23,11 +23,23 @@
             <div>
                 <div *ngFor="let directory of directories;">
                     <div class="m-4" title="{{directory.name}}">
-                        <img height="60" width="60" src="/content/images/folder.ico">
+                        <img height="60" width="50" src="/content/images/folder.ico">
                         <h5 class="text-white">{{directory.name}}</h5>
                     </div>
                 </div>
             </div>
+            <ul class="text-white m-4">
+                <li (click)="openNew(content)">New Folder</li>
+                <li>Create Document</li>
+                <li>Copy</li>
+                <li>Paste</li>
+            </ul>
+            <ng-template #content let-modal>
+                <div class="modal-body">
+                    <input class="form-control" placeholder="Enter Directory Name" [(ngModel)]="dirName" name="new">
+                </div>
+                <button class="btn btn-sm" (click)="createDirectory()">Create</button>
+            </ng-template>
         </div>
     </div>
 </div>

@@ -33,6 +33,7 @@ export class DirectoryUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.directory.parent = 'Desktop';
         this.directory.timeStamp = this.timeStamp != null ? moment(this.timeStamp, DATE_TIME_FORMAT) : null;
         if (this.directory.id !== undefined) {
             this.subscribeToSaveResponse(this.directoryService.update(this.directory));

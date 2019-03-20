@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -44,6 +45,10 @@ public class DirectoryServiceImpl implements DirectoryService {
     public DirectoryDTO save(DirectoryDTO directoryDTO) {
         log.debug("Request to save Directory : {}", directoryDTO);
         Directory directory = directoryMapper.toEntity(directoryDTO);
+        directory.setTimeStamp(Instant.now());
+        directory.setParent("Desktop");
+        directory.setType("Directory");
+        directory.setIsDirectory(true);
         directory = directoryRepository.save(directory);
         return directoryMapper.toDto(directory);
     }

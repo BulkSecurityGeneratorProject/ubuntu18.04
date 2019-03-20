@@ -9,6 +9,10 @@ import {IDirectory} from '../shared/model/directory.model';
 import {DirectoryService} from '../entities/directory/directory.service';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import { filter, map } from 'rxjs/operators';
+import * as moment from 'moment';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Observable} from 'rxjs/index';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 @Component({
     selector: 'jhi-home',
@@ -22,9 +26,20 @@ export class HomeComponent implements OnInit {
     username: string;
     credentials: any;
     directories: IDirectory[];
+    closeResult: string;
+    dirName: any;
+    directory = {
+        name: null,
+        parent: null,
+        type: null,
+        isDirectory: null
+    };
+    isSaving: boolean;
+    timeStamp: string;
 
     constructor(
         private eventManager: JhiEventManager,
+        private modalService: NgbModal,
         private loginService: LoginService,
         private stateStorageService: StateStorageService,
         private router: Router,
@@ -92,8 +107,33 @@ export class HomeComponent implements OnInit {
                 (res: IDirectory[]) => {
                     this.directories = res;
                 },
-                (res: HttpErrorResponse) => this.onError(res.message)
+                (res: HttpErrorResponse) => console.log(res)
             );
         // console.log()
     }
+
+    openNew(content) {
+        this.modalService.open(content, { centered: true });
+    }
+
+    createDirectory() {
+        this.isSaving = true;
+        this.directory.parent = 'Desktop';
+        this.directory.name = this.dirName;
+        this.subscribeToSaveResponse(this.directoryService.create(this.directory));
+    }
+
+    protected subscribeToSaveResponse(result: Observable<HttpResponse<IDirectory>>) {
+        result.subscribe((res: HttpResponse<IDirectory>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    }
+
+    protected onSaveSuccess() {
+        this.isSaving = false;
+        this.loadAll();
+    }
+
+    protected onSaveError() {
+        this.isSaving = false;
+    }
+
 }
