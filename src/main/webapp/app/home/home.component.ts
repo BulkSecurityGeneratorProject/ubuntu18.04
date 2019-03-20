@@ -5,6 +5,10 @@ import { AccountService, Account } from 'app/core';
 import {Router} from '@angular/router';
 import {StateStorageService} from '../core/auth/state-storage.service';
 import {LoginService} from '../core/login/login.service';
+import {IDirectory} from '../shared/model/directory.model';
+import {DirectoryService} from '../entities/directory/directory.service';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
     selector: 'jhi-home',
@@ -17,12 +21,14 @@ export class HomeComponent implements OnInit {
     rememberMe: boolean;
     username: string;
     credentials: any;
+    directories: IDirectory[];
 
     constructor(
         private eventManager: JhiEventManager,
         private loginService: LoginService,
         private stateStorageService: StateStorageService,
         private router: Router,
+        protected directoryService: DirectoryService,
         private accountService: AccountService,
     ) {
         this.credentials = {};
@@ -33,6 +39,7 @@ export class HomeComponent implements OnInit {
             this.account = account;
         });
         this.registerAuthenticationSuccess();
+        this.loadAll();
     }
 
     registerAuthenticationSuccess() {
@@ -72,5 +79,21 @@ export class HomeComponent implements OnInit {
             })
             .catch(() => {
             });
+    }
+
+    loadAll() {
+        this.directoryService
+            .query()
+            .pipe(
+                filter((res: HttpResponse<IDirectory[]>) => res.ok),
+                map((res: HttpResponse<IDirectory[]>) => res.body)
+            )
+            .subscribe(
+                (res: IDirectory[]) => {
+                    this.directories = res;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        // console.log()
     }
 }

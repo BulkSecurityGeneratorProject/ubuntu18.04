@@ -15,10 +15,17 @@
     </div>
 
     <div *ngSwitchCase="true" style="background-image:url('/content/images/ubuntu18.jpg');background-repeat: no-repeat; background-size: cover; height: 96vh;">
-        <div>
+        <div class="row pl-2" style="margin-right: 100px">
             <div class="pt-2" style="height: 96vh;width:80px;background: #250811;">
                 <div style="width: 78px;height: 46vh; background-image: url('/content/images/icons.png');background-repeat: no-repeat; background-size: cover;">
-
+                </div>
+            </div>
+            <div>
+                <div *ngFor="let directory of directories;">
+                    <div class="m-4" title="{{directory.name}}">
+                        <img height="60" width="60" src="/content/images/folder.ico">
+                        <h5 class="text-white">{{directory.name}}</h5>
+                    </div>
                 </div>
             </div>
         </div>

@@ -51,7 +51,13 @@ public class DirectoryResource {
     public ResponseEntity<DirectoryDTO> createDirectory(@RequestBody DirectoryDTO directoryDTO) throws URISyntaxException {
         log.debug("REST request to save Directory : {}", directoryDTO);
         try {
-            Process p = Runtime.getRuntime().exec("mkdir Desktop/"+directoryDTO.getName());
+            String command = null;
+            if(directoryDTO.getParent().equals("Desktop")){
+                command = "mkdir Desktop/"+directoryDTO.getName();
+            }else{
+                command = "";
+            }
+            Process p = Runtime.getRuntime().exec(command);
             new BufferedReader(new InputStreamReader(p.getInputStream()));
             new BufferedReader(new InputStreamReader(p.getErrorStream()));
         }
