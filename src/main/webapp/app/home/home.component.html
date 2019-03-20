@@ -1,0 +1,26 @@
+<div [ngSwitch]="isAuthenticated()">
+    <div *ngSwitchCase="false" style="background-color: #330C1F; height: 96vh;"><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div class="col-md-4 offset-4 p-4" style="border: 1px solid white;">
+            <h5 class="text-white mt-3 mb-3">Admin</h5>
+            <div class="form-group">
+                <label class="text-white" for="password">Password</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password"
+                       [(ngModel)]="password">
+            </div>
+            <div>
+                <button style="background-color: #333332" type="button" class="btn btn-sm text-white">Cancel</button>
+                <button (click)="login()" style="background-color: #333332" type="button" class="btn btn-sm text-white float-right">Unlock</button>
+            </div>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="true" style="background-image:url('/content/images/ubuntu18.jpg');background-repeat: no-repeat; background-size: cover; height: 96vh;">
+        <div>
+            <div class="pt-2" style="height: 96vh;width:80px;background: #250811;">
+                <div style="width: 78px;height: 46vh; background-image: url('/content/images/icons.png');background-repeat: no-repeat; background-size: cover;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

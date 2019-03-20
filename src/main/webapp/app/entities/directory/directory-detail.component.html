@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="directory">
+            <h2><span>Directory</span> {{directory.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{directory.name}}</span>
+                </dd>
+                <dt><span>Parent</span></dt>
+                <dd>
+                    <span>{{directory.parent}}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{directory.type}}</span>
+                </dd>
+                <dt><span>Is Directory</span></dt>
+                <dd>
+                    <span>{{directory.isDirectory}}</span>
+                </dd>
+                <dt><span>Time Stamp</span></dt>
+                <dd>
+                    <span>{{directory.timeStamp}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/directory', directory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

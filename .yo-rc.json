@@ -1,0 +1,37 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.signzy.ubuntu"
+    },
+    "jhipsterVersion": "5.8.2",
+    "applicationType": "monolith",
+    "baseName": "ubuntu18",
+    "packageName": "com.signzy.ubuntu",
+    "packageFolder": "com/signzy/ubuntu",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": false,
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "YTE0MDkyNmI1YTk0MmUwNDZiNzM2MzNmZmM0ZDg2NmY5OGE3MTAxNTQxZWFmNzIyYWI3ZjhjZGU4ZjZmMDQzNjdhZWQ0NWE4YTAzNDg0OGRkMTg0ZjM0ZTIzNzAxYThmODBjYmM1YTU2NDc5ZGM5ZjI1OWEyZTIwMDJlZWUwN2U=",
+    "clientFramework": "angularX",
+    "useSass": false,
+    "clientPackageManager": "npm",
+    "testFrameworks": [
+      "protractor"
+    ],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false
+  }
+}
